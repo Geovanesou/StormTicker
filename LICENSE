@@ -1,0 +1,35 @@
+Copyright (c) 2026 Geovane Souza (eu@geovanesou.com)
+All Rights Reserved.
+
+PROPRIETARY SOFTWARE LICENSE — STORMTICKER PRO
+
+This software and associated documentation files (the "Software") are the original,
+independent, and proprietary intellectual property of Geovane Souza.
+
+1. GRANT OF LICENSE:
+Permission is hereby granted to individuals who lawfully acquire a copy of this
+Software to use, execute, and customize the Software exclusively for personal,
+non-commercial desktop customization purposes.
+
+2. RESTRICTIONS:
+- You may NOT sell, rent, lease, sublicense, or distribute modified or unmodified
+  copies of this Software or derivative works for commercial gain without explicit
+  prior written permission from the author.
+- You may NOT re-host or upload standalone installer packages (.rmskin) to external
+  mirrors or public distribution channels without preserving all original attribution,
+  copyright notices, and links to the official project repository.
+
+3. CLEAN-ROOM ARCHITECTURE STATEMENT:
+This Software was architected and authored entirely from the ground up, utilizing
+an original asynchronous Lua matrix engine and DirectWrite container rendering.
+It is an independent creation and bears no code derivation, lineage, or dependency
+upon prior third-party Rainmeter skin codebases.
+
+4. DISCLAIMER:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

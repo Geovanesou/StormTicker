@@ -1,0 +1,8 @@
+# Rainmeter build artifacts & cache
+*.rmskin
+*.log
+*.bak
+*.bak*
+Thumbs.db
+Desktop.ini
+hipodromo-gavea.webp
