@@ -16,7 +16,7 @@
 
 ## ⚡ Upgrade to StormTicker Pro (10 Channels)
 
-Want to run up to **10 completely independent channels simultaneously** with curated 1-click market presets, custom refresh cadences, and exclusive features?
+Want to run up to **10 completely independent channels simultaneously** with individual speed controls, custom refresh cadences, and exclusive features?
 
 👉 **[Unlock StormTicker Pro on DeviantArt](https://www.deviantart.com/geovanesou/art/1381771713)**
 
@@ -27,7 +27,6 @@ Want to run up to **10 completely independent channels simultaneously** with cur
 | **Direct Portal Navigation** | ✅ Included | ✅ Included |
 | **DirectWrite Hardware Acceleration** | ✅ 60 FPS | ✅ 60 FPS |
 | **Smart Hover Freeze & Mouse Scrubbing** | ✅ Included | ✅ Included |
-| **Curated 1-Click Presets (Bolsa, Geral, Tech)** | Basic | **Full Library** |
 | **Individual Speed Tuning per Row** | Standard | **Full (0.5x to 1.5x)** |
 | **Custom Refresh Intervals (15m to 6h)** | Standard | **Full Selector** |
 | **Lifetime Updates & Priority Support** | Community | **VIP / Pro** |

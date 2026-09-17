@@ -23,7 +23,7 @@ local PromoHeadlines = {
         link = "https://www.deviantart.com/geovanesou/art/1381771713"
     },
     {
-        title = "⚡ DESBLOQUEIE TODOS OS RECURSOS: Velocidades independentes por canal, seletor de cadência (15m a 6h) e presets instantâneos!",
+        title = "⚡ DESBLOQUEIE TODOS OS RECURSOS: Velocidades independentes por canal, seletor de cadência (15m a 6h) e matriz expandida!",
         link = "https://www.deviantart.com/geovanesou/art/1381771713"
     },
     {
