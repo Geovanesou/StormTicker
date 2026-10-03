@@ -6,3 +6,8 @@
 Thumbs.db
 Desktop.ini
 hipodromo-gavea.webp
+*.psd
+
+# Exclude heavy assets content from git except official release showcase
+assets/*
+!assets/stormticker-release.jpg
