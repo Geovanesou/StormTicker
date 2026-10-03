@@ -1,35 +1,38 @@
 # ⚡ StormTicker — Asynchronous Desktop News Matrix
 
 [![Rainmeter](https://img.shields.io/badge/Rainmeter-4.5%2B-2563EB?style=for-the-badge&logo=windows&logoColor=white)](https://www.rainmeter.net/)
-[![Version](https://img.shields.io/badge/Version-1.0.0-f59e0b?style=for-the-badge)](https://github.com/Geovanesou/StormTicker/releases)
+[![Version](https://img.shields.io/badge/Version-1.1.0-f59e0b?style=for-the-badge)](https://github.com/Geovanesou/StormTicker/releases)
 [![License](https://img.shields.io/badge/License-Proprietary-D97706?style=for-the-badge)](LICENSE)
 [![DeviantArt](https://img.shields.io/badge/DeviantArt-geovanesou-00E59B?style=for-the-badge&logo=deviantart&logoColor=black)](https://www.deviantart.com/geovanesou)
+[![Watch Demo](https://img.shields.io/badge/Watch_Demo-60_FPS_Video-E11D48?style=for-the-badge&logo=deviantart&logoColor=white)](https://www.deviantart.com/geovanesou/art/1381803728)
 
 <p align="center">
   <img src="assets/stormticker-release.jpg" alt="StormTicker Release Showcase" width="100%">
 </p>
 
 > **A high-performance, asynchronous news ticker matrix for Rainmeter.**  
-> Featuring hardware-accelerated DirectWrite text streaming, full visual source management without text editors, intelligent hover pauses, interactive mouse wheel scrubbing, and direct portal navigation.
+> Featuring hardware-accelerated DirectWrite text streaming, full visual source management without text editors, intelligent hover pauses, interactive mouse wheel scrubbing, and direct portal navigation.  
+> 🎬 **[Watch 60 FPS Live Action Video Demo on DeviantArt](https://www.deviantart.com/geovanesou/art/1381803728)**
 
 ---
 
 ## ⚡ Upgrade to StormTicker Pro (10 Channels)
 
-Want to run up to **10 completely independent channels simultaneously** with individual speed controls, custom refresh cadences, and exclusive features?
+Want to run up to **10 completely independent channels simultaneously** with full desktop matrix coverage and a 100% ad-free experience?
 
 👉 **[Unlock StormTicker Pro on DeviantArt](https://www.deviantart.com/geovanesou/art/1381771713)**
 
 | Feature | StormTicker (Free) | StormTicker Pro |
 |---|:---:|:---:|
 | **Concurrent News Lines** | 3 Channels | **10 Channels** |
-| **Pro Feature Showcase Stream** | ✅ Included | Full Matrix Mode |
+| **Stream Experience** | Includes Promo Row | **100% Clean / Ad-Free** |
 | **Direct Portal Navigation** | ✅ Included | ✅ Included |
 | **DirectWrite Hardware Acceleration** | ✅ 60 FPS | ✅ 60 FPS |
 | **Smart Hover Freeze & Mouse Scrubbing** | ✅ Included | ✅ Included |
-| **Individual Speed Tuning per Row** | Standard | **Full (0.5x to 1.5x)** |
-| **Custom Refresh Intervals (15m to 6h)** | Standard | **Full Selector** |
-| **Lifetime Updates & Priority Support** | Community | **VIP / Pro** |
+| **Individual Speed Tuning per Row** | ✅ 0.5x to 1.5x (3 Rows) | **✅ 0.5x to 1.5x (All 10 Rows)** |
+| **Custom Refresh Intervals (15m to 6h)** | ✅ Full Selector | ✅ Full Selector |
+| **Settings GUI Configuration** | Tabs 1–3 Unlocked | **All 10 Tabs Unlocked** |
+| **Lifetime Updates & Priority Support** | Community | **VIP / Pro Support** |
 
 ---
 
