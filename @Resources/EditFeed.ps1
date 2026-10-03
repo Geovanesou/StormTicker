@@ -37,7 +37,7 @@ if ($FeedsPath -ne "" -and (Test-Path $FeedsPath)) {
 }
 
 $form = New-Object System.Windows.Forms.Form
-$form.Text            = "StormTicker Pro - $title"
+$form.Text            = "StormTicker - $title"
 $form.StartPosition = 'Manual'
 $screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
 $form.Location = New-Object System.Drawing.Point( [math]::Round(($screen.Width - 450) / 2), [math]::Round($screen.Height - 300) )
