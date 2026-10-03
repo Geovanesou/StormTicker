@@ -4,15 +4,13 @@
 [![Version](https://img.shields.io/badge/Version-1.1.0-f59e0b?style=for-the-badge)](https://github.com/Geovanesou/StormTicker/releases)
 [![License](https://img.shields.io/badge/License-Proprietary-D97706?style=for-the-badge)](LICENSE)
 [![DeviantArt](https://img.shields.io/badge/DeviantArt-geovanesou-00E59B?style=for-the-badge&logo=deviantart&logoColor=black)](https://www.deviantart.com/geovanesou)
-[![Watch Demo](https://img.shields.io/badge/Watch_Demo-60_FPS_Video-E11D48?style=for-the-badge&logo=deviantart&logoColor=white)](https://www.deviantart.com/geovanesou/art/1381803728)
 
 <p align="center">
   <img src="assets/stormticker-release.jpg" alt="StormTicker Release Showcase" width="100%">
 </p>
 
 > **A high-performance, asynchronous news ticker matrix for Rainmeter.**  
-> Featuring hardware-accelerated DirectWrite text streaming, full visual source management without text editors, intelligent hover pauses, interactive mouse wheel scrubbing, and direct portal navigation.  
-> 🎬 **[Watch 60 FPS Live Action Video Demo on DeviantArt](https://www.deviantart.com/geovanesou/art/1381803728)**
+> Featuring hardware-accelerated DirectWrite text streaming, full visual source management without text editors, intelligent hover pauses, interactive mouse wheel scrubbing, and direct portal navigation.
 
 ---
 
