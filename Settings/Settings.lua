@@ -2,6 +2,14 @@
 -- StormTicker - Settings Manager Helper Script (Standard Edition)
 -- ==============================================================================
 
+-- v1.2.0: persiste CurrentTab no proprio Settings.ini para que qualquer
+-- refresh (self, RefreshApp, EditFeed.ps1) retorne a mesma aba
+function SetTab(tabId)
+    SKIN:Bang('!SetVariable', 'CurrentTab', tostring(tabId))
+    SKIN:Bang('!WriteKeyValue', 'Variables', 'CurrentTab', tostring(tabId))
+    UpdateUI()
+end
+
 function UpdateUI()
     local tab = SKIN:GetVariable('CurrentTab', '0')
 

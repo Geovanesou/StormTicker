@@ -1,7 +1,7 @@
 -- ==============================================================================
 -- [⚡] StormTicker - Asynchronous Multi-Line Ticker Engine (DirectWrite)
 -- Copyright (c) 2026 Geovane Souza. All Rights Reserved.
--- v1.1.0: BBC Weather utility strip, split-flap board, panoramic single-line mode
+-- v1.2.0: First-run onboarding, English default, SafeUpper latin caps, full Settings i18n
 -- ==============================================================================
 
 local Lines = {}
@@ -17,7 +17,7 @@ local FRESH_DURATION = 420 -- 7 minutos em segundos
 local TickCounter = 0
 local BootTimer = 0
 
--- v1.1.0 state
+-- v1.2.0 state
 local ViewMode = 0
 local Weather = { available = false, city = "", temp = "", cond = "", wind = "", pressHum = "", tempCond = "", icon = "clear-day.png", forecast = {} }
 local Forecast = { ready = false, text = "" }
@@ -30,6 +30,38 @@ local DAY_SHORT = {
 }
 local Pan = { pos = 0, singleWidth = 0, speed = 1.0, paused = false, isReady = false }
 local FLAP_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+-- v1.2.0: uppercase helper for accented Latin characters.
+-- string.upper() only handles ASCII in Lua 5.1, so accented lowercase
+-- letters are remapped after the ASCII pass. The gsub pattern captures
+-- each UTF-8 multi-byte sequence (lead byte + continuation bytes) as a
+-- whole character, so 2-byte keys like 'á' actually match.
+local LATIN_UPPER_MAP = {
+    -- Single-byte Latin-1/CP1252 keys: Rainmeter passes skin strings to Lua
+    -- in the system ANSI codepage, so accented chars arrive as one byte.
+    ['\224'] = '\192', ['\225'] = '\193', ['\227'] = '\195', ['\226'] = '\194', ['\228'] = '\196',
+    ['\232'] = '\200', ['\233'] = '\201', ['\234'] = '\202', ['\235'] = '\203',
+    ['\236'] = '\204', ['\237'] = '\205', ['\238'] = '\206', ['\239'] = '\207',
+    ['\242'] = '\210', ['\243'] = '\211', ['\245'] = '\213', ['\244'] = '\212', ['\246'] = '\214',
+    ['\250'] = '\218', ['\249'] = '\217', ['\251'] = '\219', ['\252'] = '\220',
+    ['\231'] = '\199', ['\241'] = '\209',
+    -- UTF-8 multi-byte keys as defensive fallback
+    ['á'] = 'Á', ['à'] = 'À', ['ã'] = 'Ã', ['â'] = 'Â', ['ä'] = 'Ä',
+    ['é'] = 'É', ['è'] = 'È', ['ê'] = 'Ê', ['ë'] = 'Ë',
+    ['í'] = 'Í', ['ì'] = 'Ì', ['î'] = 'Î', ['ï'] = 'Ï',
+    ['ó'] = 'Ó', ['ò'] = 'Ò', ['õ'] = 'Õ', ['ô'] = 'Ô', ['ö'] = 'Ö',
+    ['ú'] = 'Ú', ['ù'] = 'Ù', ['û'] = 'Û', ['ü'] = 'Ü',
+    ['ç'] = 'Ç', ['ñ'] = 'Ñ',
+}
+
+function SafeUpper(str)
+    if not str then return "" end
+    -- Matches each UTF-8 multi-byte sequence (lead + continuations) as one
+    -- char, or a lone high byte (Latin-1/CP1252) as one char.
+    return (string.upper(str):gsub('[\128-\255][\128-\191]*', function(c)
+        return LATIN_UPPER_MAP[c] or c
+    end))
+end
 
 -- Alinha o topo visual do icone diretamente contra o teto do espaco
 local function GetIconY(iconName)
@@ -48,9 +80,9 @@ end
 
 -- Manchetes Promocionais da Versão Pro (Linha 4 CTA)
 function GetPromoHeadlines()
-    local p1 = SKIN:GetVariable('PromoHeadline1', 'CONHECA O STORMTICKER PRO: 10 canais assincronos simultaneos e monitoramento de clima de ate 3 locais!')
-    local p2 = SKIN:GetVariable('PromoHeadline2', 'MATRIZ COMPLETA DE 10 CANAIS: Monitore 10 portais simultaneos em tempo real e sem anuncios com o StormTicker Pro!')
-    local p3 = SKIN:GetVariable('PromoHeadline3', 'ACESSE A EDICAO PRO NO DEVIANTART: Clique aqui para garantir sua licenca vitalicia da versao completa de 10 canais!')
+    local p1 = SKIN:GetVariable('PromoHeadline1', 'DISCOVER STORMTICKER PRO: 10 simultaneous async channels and weather monitoring for up to 3 locations!')
+    local p2 = SKIN:GetVariable('PromoHeadline2', 'FULL 10-CHANNEL MATRIX: Monitor 10 portals simultaneously in real time, ad-free, with StormTicker Pro!')
+    local p3 = SKIN:GetVariable('PromoHeadline3', 'GET THE PRO EDITION ON DEVIANTART: Click here to grab your lifetime license of the full 10-channel version!')
     local link = SKIN:GetVariable('ProDeviantUrl', 'https://www.deviantart.com/geovanesou/art/1381771713')
     return {
         { title = p1, link = link },
@@ -85,7 +117,7 @@ function CleanHeadline(str)
     str = str:gsub('&#060;', '<'):gsub('&#60;', '<'):gsub('&lt;', '<')
     str = str:gsub('&#062;', '>'):gsub('&#62;', '>'):gsub('&gt;', '>')
     str = str:gsub('&#160;', ' '):gsub('&nbsp;', ' ')
-    str = str:gsub('&bull;', '•')
+    str = str:gsub('&bull;', '\149')
     str = str:gsub('&deg;', '\176')
 
     str = str:gsub('&#(%d+);', function(code)
@@ -158,6 +190,15 @@ function Initialize()
     LayoutRows()
     ApplyViewMode()
     RebuildPanMarquee()
+
+    -- FirstRun Onboarding: abre o assistente de configuracoes na primeira inicializacao da suite
+    local firstRun = tonumber(SKIN:GetVariable('FirstRun', '0')) or 0
+    if firstRun == 1 then
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'FirstRun', '0', '#@#Config.inc')
+        SKIN:Bang('!SetVariable', 'FirstRun', '0')
+        SKIN:Bang('!ActivateConfig', '#ROOTCONFIG#\\Settings', 'Settings.ini')
+    end
+
     Initialized = true
 end
 
@@ -378,6 +419,9 @@ function RebuildPanMarquee()
     if ViewMode ~= 1 then return end
 
     local titles = {}
+    local panItems = {}
+    local totalChars = 0
+    local sepChars = #Separator
     for i = 1, 10 do
         if i ~= 4 then
             local enabled = tonumber(SKIN:GetVariable('FeedEnabled' .. i, '1')) or 1
@@ -385,10 +429,15 @@ function RebuildPanMarquee()
             if enabled == 1 and line and line.isReady and line.items then
                 for _, item in ipairs(line.items) do
                     table.insert(titles, item.title)
+                    local itemChars = #item.title + sepChars
+                    table.insert(panItems, { link = item.link or '', feedIdx = i, chars = itemChars })
+                    totalChars = totalChars + itemChars
                 end
             end
         end
     end
+    Pan.items = panItems
+    Pan.totalChars = totalChars
 
     if #titles == 0 then
         Pan.isReady = false
@@ -456,7 +505,7 @@ local function GetWeatherConditionText(code)
         elseif code >= 71 and code <= 75 then text = SKIN:GetVariable('Lang_Weather_71', 'Neve')
         elseif code >= 80 and code <= 82 then text = SKIN:GetVariable('Lang_Weather_81', 'Pancadas')
         elseif code >= 95 then text = SKIN:GetVariable('Lang_Weather_95', 'Tempestade')
-        else text = SKIN:GetVariable('Lang_Weather_0', 'Ceu Limpo')
+        else text = SKIN:GetVariable('Lang_Weather_0', 'C\233u Limpo')
         end
     end
     return text
@@ -727,7 +776,7 @@ function UpdateWeather()
     end
 
     local tempVal = tonumber(tempStr) or 0
-    local unit = SKIN:GetVariable('WeatherUnit', 'C'):upper()
+    local unit = SafeUpper(SKIN:GetVariable('WeatherUnit', 'C'))
     local unitSymbol = (unit == 'F') and '\176F' or '\176C'
     Weather.temp = string.format('%.0f%s', tempVal, unitSymbol)
 
@@ -884,6 +933,9 @@ function SetFeedOffline(lineIndex)
     SKIN:Bang('!SetOption', textMeter, 'FontColor', offTextColor)
     SKIN:Bang('!UpdateMeter', textMeter)
     SKIN:Bang('!Redraw')
+
+    line.items = {}
+    RebuildPanMarquee()
 end
 
 -- Reconstrói a linha com highlight amarelo dos itens frescos via regex
@@ -1022,6 +1074,11 @@ function Update()
     if not Initialized then return end
 
     if ViewMode == 1 then
+        -- Auto-resume: MouseLeave pode ser perdido se o cursor saltar para
+        -- outra skin/borda; sem isso o marquee congela mostrando itens velhos
+        if Pan.paused and Pan.pausedSince and (os.time() - Pan.pausedSince) > 300 then
+            ResumePan()
+        end
         if Pan.isReady and not Pan.paused and Pan.singleWidth > 0 then
             Pan.pos = Pan.pos - (Pan.speed * BaseSpeed)
             if Pan.pos <= -Pan.singleWidth then
@@ -1158,10 +1215,12 @@ end
 
 function PausePan()
     Pan.paused = true
+    Pan.pausedSince = os.time()
 end
 
 function ResumePan()
     Pan.paused = false
+    Pan.pausedSince = nil
 end
 
 function ScrollLine(lineIndex, direction)
@@ -1187,6 +1246,34 @@ function ScrollLine(lineIndex, direction)
 
     if line.paused then
         ShowHeadlineTooltip(lineIndex)
+    end
+end
+
+-- v1.2.0: abre o link do item sob o cursor no marquee panoramico.
+-- O marquee e um meter unico, entao o item e resolvido por share de
+-- caracteres (aproximacao aceitavel para fontes proporcionais).
+function OpenPanLink(mouseX)
+    if not Pan.items or #Pan.items == 0 or Pan.singleWidth <= 0 or not Pan.totalChars or Pan.totalChars <= 0 then return end
+    mouseX = tonumber(mouseX) or 0
+
+    local containerMeter = SKIN:GetMeter('MeterPanContainer')
+    local containerX = containerMeter and containerMeter:GetX() or 4
+
+    local rel = (mouseX - containerX - Pan.pos) % Pan.singleWidth
+    local charPos = rel / Pan.singleWidth * Pan.totalChars
+
+    local acc = 0
+    local target = nil
+    for _, it in ipairs(Pan.items) do
+        acc = acc + it.chars
+        if charPos <= acc then target = it break end
+    end
+    -- Fallback: posicao fora do range mapeado -> abre o primeiro item
+    if not target then target = Pan.items[1] end
+    if target then
+        local link = target.link
+        if link == '' then link = SKIN:GetVariable('FeedURL' .. target.feedIdx, '') end
+        if link ~= '' then SKIN:Bang('["' .. link .. '"]') end
     end
 end
 
