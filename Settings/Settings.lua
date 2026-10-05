@@ -241,11 +241,10 @@ function SetWeatherSystem(sys)
     local apiUnit = (sys == 'imperial') and 'fahrenheit' or 'celsius'
     local windUnit = (sys == 'imperial') and 'mph' or 'kmh'
     
-    local configPath = SKIN:GetVariable('@') .. 'Config.inc'
-    WriteIniKey(configPath, 'Variables', 'WeatherSystem', sys)
-    WriteIniKey(configPath, 'Variables', 'WeatherUnit', unit)
-    WriteIniKey(configPath, 'Variables', 'WeatherApiUnit', apiUnit)
-    WriteIniKey(configPath, 'Variables', 'WeatherWindUnit', windUnit)
+    SKIN:Bang('!WriteKeyValue', 'Variables', 'WeatherSystem', sys, '#@#Config.inc')
+    SKIN:Bang('!WriteKeyValue', 'Variables', 'WeatherUnit', unit, '#@#Config.inc')
+    SKIN:Bang('!WriteKeyValue', 'Variables', 'WeatherApiUnit', apiUnit, '#@#Config.inc')
+    SKIN:Bang('!WriteKeyValue', 'Variables', 'WeatherWindUnit', windUnit, '#@#Config.inc')
 
     SKIN:Bang('!SetVariable', 'WeatherSystem', sys)
     SKIN:Bang('!SetVariable', 'WeatherUnit', unit)
@@ -259,20 +258,31 @@ end
 function SetCoordinates(inputStr)
     if not inputStr or inputStr == '' then return end
     local lat, lon = inputStr:match('([%-%d%.]+)[,%s]+([%-%d%.]+)')
-    if lat and lon then
-        SKIN:Bang('!WriteKeyValue', 'Variables', 'WeatherLatitude', lat, '#@#Config.inc')
-        SKIN:Bang('!WriteKeyValue', 'Variables', 'WeatherLongitude', lon, '#@#Config.inc')
-        SKIN:Bang('!SetVariable', 'WeatherLatitude', lat)
-        SKIN:Bang('!SetVariable', 'WeatherLongitude', lon)
-        SKIN:Bang('!SetOption', 'MeterWtrValCoords', 'Text', lat .. ', ' .. lon)
+    if not (lat and lon) then
+        SKIN:Bang('!SetOption', 'MeterWtrValCoords', 'Text', '#Lang_InvalidCoords#')
         SKIN:Bang('!UpdateMeter', 'MeterWtrValCoords')
         SKIN:Bang('!Redraw')
-        
-        -- Dispara geocodificacao reversa
-        local geoUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' .. lat .. '&longitude=' .. lon .. '&localityLanguage=en'
-        SKIN:Bang('!SetOption', 'MeasureGeocoding', 'Url', geoUrl)
-        SKIN:Bang('!CommandMeasure', 'MeasureGeocoding', 'Update')
+        return
     end
+    SKIN:Bang('!WriteKeyValue', 'Variables', 'WeatherLatitude', lat, '#@#Config.inc')
+    SKIN:Bang('!WriteKeyValue', 'Variables', 'WeatherLongitude', lon, '#@#Config.inc')
+    SKIN:Bang('!SetVariable', 'WeatherLatitude', lat)
+    SKIN:Bang('!SetVariable', 'WeatherLongitude', lon)
+    SKIN:Bang('!SetOption', 'MeterWtrValCoords', 'Text', lat .. ', ' .. lon)
+    SKIN:Bang('!UpdateMeter', 'MeterWtrValCoords')
+    SKIN:Bang('!Redraw')
+
+    -- Propaga lat/lon para as skins ativas (sem isso o update do clima refaz fetch nas coords antigas)
+    for _, cfg in ipairs({'StormTicker\\Panoramic', 'StormTicker\\Box'}) do
+        SKIN:Bang('!SetVariable', 'WeatherLatitude', lat, cfg)
+        SKIN:Bang('!SetVariable', 'WeatherLongitude', lon, cfg)
+        SKIN:Bang('!CommandMeasure', 'MeasureWeatherApi', 'Update', cfg)
+    end
+
+    -- Dispara geocodificacao reversa
+    local geoUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' .. lat .. '&longitude=' .. lon .. '&localityLanguage=en'
+    SKIN:Bang('!SetOption', 'MeasureGeocoding', 'Url', geoUrl)
+    SKIN:Bang('!CommandMeasure', 'MeasureGeocoding', 'Update')
 end
 
 function OnLocationResolved()
@@ -294,10 +304,8 @@ function OnLocationResolved()
         SKIN:Bang('!UpdateMeter', 'MeterWtrValCity')
         SKIN:Bang('!Redraw')
 
-        -- Atualiza nas skins ativas (Panoramic e Box)
+        -- Propaga o nome da cidade para as skins ativas
         SKIN:Bang('!SetVariable', 'WeatherCity', loc, 'StormTicker\\Panoramic')
-        SKIN:Bang('!CommandMeasure', 'MeasureWeatherApi', 'Update', 'StormTicker\\Panoramic')
         SKIN:Bang('!SetVariable', 'WeatherCity', loc, 'StormTicker\\Box')
-        SKIN:Bang('!CommandMeasure', 'MeasureWeatherApi', 'Update', 'StormTicker\\Box')
     end
 end

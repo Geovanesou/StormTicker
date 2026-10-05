@@ -1,10 +1,10 @@
 # ==============================================================================
-# StormTicker Standard 1.2.0 - Release Packaging Script
+# StormTicker Standard 1.2.1 - Release Packaging Script
 # Builds StormTicker_1.2.0.rmskin + StormTicker_1.2.0.zip (with README.txt)
 # ==============================================================================
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$ver  = '1.2.0'
+$ver  = '1.2.1'
 $name = 'StormTicker'
 $dist = Join-Path (Split-Path -Parent $root) 'dist'
 $work = Join-Path $env:TEMP "st-build-$ver"
@@ -63,6 +63,12 @@ $readme = Join-Path $work 'README.txt'
 StormTicker Standard $ver
 =========================
 Asynchronous multi-channel news ticker and weather suite for Rainmeter.
+
+NEW IN 1.2.1
+- FIX: weather coordinates now propagate live to the ticker (no reload needed)
+- FIX: reverse-geocoding measure now resolves city names (missing RegExp)
+- FIX: metric/imperial toggle no longer crashes (undefined WriteIniKey)
+- FIX: invalid coordinate input shows a localized hint
 
 NEW IN 1.2.0
 - English default UI + first-run onboarding wizard (opens Settings on first boot)

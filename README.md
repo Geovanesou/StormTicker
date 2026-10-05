@@ -1,8 +1,8 @@
 # ⚡ StormTicker — Asynchronous Desktop News Matrix & Weather Suite
 
 [![Rainmeter](https://img.shields.io/badge/Rainmeter-4.5%2B-2563EB?style=for-the-badge&logo=windows&logoColor=white)](https://www.rainmeter.net/)
-[![Version](https://img.shields.io/badge/Version-1.2.0-f59e0b?style=for-the-badge)](https://github.com/Geovanesou/StormTicker/releases)
-[![Download RMSKIN](https://img.shields.io/badge/Download-.rmskin_v1.2.0-10B981?style=for-the-badge&logo=rainmeter&logoColor=white)](https://github.com/Geovanesou/StormTicker/releases/download/v1.2.0/StormTicker_1.2.0.rmskin)
+[![Version](https://img.shields.io/github/v/release/Geovanesou/StormTicker?style=for-the-badge&color=f59e0b&label=Version)](https://github.com/Geovanesou/StormTicker/releases)
+[![Downloads](https://img.shields.io/github/downloads/Geovanesou/StormTicker/total?style=for-the-badge&color=10B981&logo=rainmeter&logoColor=white)](https://github.com/Geovanesou/StormTicker/releases/latest)
 [![Languages](https://img.shields.io/badge/Languages-EN%20%7C%20PT%20%7C%20ES-6366F1?style=for-the-badge)](https://github.com/Geovanesou/StormTicker)
 [![License](https://img.shields.io/badge/License-Proprietary-D97706?style=for-the-badge)](LICENSE)
 [![DeviantArt](https://img.shields.io/badge/DeviantArt-geovanesou-00E59B?style=for-the-badge&logo=deviantart&logoColor=black)](https://www.deviantart.com/geovanesou)
@@ -91,7 +91,7 @@ Switch themes instantly with a single click or through the context menu:
 ## 📦 Installation & Quick Start
 
 1. Ensure **[Rainmeter 4.5+](https://www.rainmeter.net/)** (or higher) is installed on Windows 10 or 11.
-2. Download the official **[`StormTicker_1.2.0.rmskin`](https://github.com/Geovanesou/StormTicker/releases/download/v1.2.0/StormTicker_1.2.0.rmskin)** package from the [Releases](https://github.com/Geovanesou/StormTicker/releases) page.
+2. Download the official **[`StormTicker_1.2.1.rmskin`](https://github.com/Geovanesou/StormTicker/releases/download/v1.2.1/StormTicker_1.2.1.rmskin)** package from the [Releases](https://github.com/Geovanesou/StormTicker/releases) page.
 3. Double-click the `.rmskin` file and follow the standard Rainmeter installation prompt.
 4. On first load, the **First-Run Setup Wizard** will launch automatically to welcome you and open the Settings Manager.
 5. In the **Rainmeter Manage** window, select your preferred layout and theme:
@@ -102,6 +102,12 @@ Switch themes instantly with a single click or through the context menu:
 ---
 
 ## 🗺️ Release History
+
+### 🌟 Version 1.2.1
+- **Live Weather Coordinates:** Latitude/longitude now propagate instantly to active skins — entering new coordinates updates the weather within seconds (previously required a full reload).
+- **Reverse Geocoding Fix:** Added missing `RegExp` on the `MeasureGeocoding` WebParser parent — city names now resolve correctly after coordinate input.
+- **Unit Toggle Crash Fix:** Replaced an undefined `WriteIniKey` helper that silently crashed the metric/imperial switch in Settings.
+- **Invalid Input Feedback:** Malformed coordinate input now shows a localized hint instead of failing silently.
 
 ### 🌟 Version 1.2.0
 - **English Default & First-Run Wizard:** English set as default out-of-the-box language, with an automated onboarding wizard opening Settings on first boot.

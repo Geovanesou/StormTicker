@@ -2,6 +2,7 @@
 -- [⚡] StormTicker - Asynchronous Multi-Line Ticker Engine (DirectWrite)
 -- Copyright (c) 2026 Geovane Souza. All Rights Reserved.
 -- v1.2.0: First-run onboarding, English default, SafeUpper latin caps, full Settings i18n
+-- v1.2.1: live weather-coord propagation, geocoding RegExp, unit-toggle crash fix
 -- ==============================================================================
 
 local Lines = {}
