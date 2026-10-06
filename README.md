@@ -67,7 +67,7 @@ Running silky-smooth, asynchronous news lines powered by Lua and DirectWrite, St
 
 ### 🎨 3 Hand-Crafted Visual Themes
 Switch themes instantly with a single click or through the context menu:
-- ⚡ **StormTicker:** Classic carbon black background with signature electric green badges and crisp typography.
+- ⚡ **Wall Street:** Classic carbon black background with signature electric green badges and crisp typography.
 - 🌆 **Cyberpunk:** Neon cyan badges and vivid magenta accents for modern dark terminal setups.
 - 🥈 **Stealth:** Minimalist titanium monochrome with muted grayscale accents.
 
@@ -91,7 +91,7 @@ Switch themes instantly with a single click or through the context menu:
 ## 📦 Installation & Quick Start
 
 1. Ensure **[Rainmeter 4.5+](https://www.rainmeter.net/)** (or higher) is installed on Windows 10 or 11.
-2. Download the official **[`StormTicker_1.2.1.rmskin`](https://github.com/Geovanesou/StormTicker/releases/download/v1.2.1/StormTicker_1.2.1.rmskin)** package from the [Releases](https://github.com/Geovanesou/StormTicker/releases) page.
+2. Download the official **[`StormTicker_1.2.2.rmskin`](https://github.com/Geovanesou/StormTicker/releases/download/v1.2.2/StormTicker_1.2.2.rmskin)** package from the [Releases](https://github.com/Geovanesou/StormTicker/releases) page.
 3. Double-click the `.rmskin` file and follow the standard Rainmeter installation prompt.
 4. On first load, the **First-Run Setup Wizard** will launch automatically to welcome you and open the Settings Manager.
 5. In the **Rainmeter Manage** window, select your preferred layout and theme:
@@ -102,6 +102,11 @@ Switch themes instantly with a single click or through the context menu:
 ---
 
 ## 🗺️ Release History
+
+### 🌟 Version 1.2.2
+- **Theme Renamed to Wall Street:** The default theme is now "Wall Street" (skins `Box Wall Street` / `Panoramic Wall Street`, `@Resources/Themes/Wall Street.inc`), matching StormTicker Pro naming.
+- **In-Skin Header Tooltips:** Hovering the mode-toggle and the SOURCES button now shows a themed tooltip inside the title bar (replacing native Windows tooltips) in English, Portuguese, and Spanish — matching the StormTicker Pro behavior.
+- **Headline Tooltip Alignment Fix:** Headline tooltips explicitly reset text alignment to left, preventing centering bleed after a header tooltip was shown.
 
 ### 🌟 Version 1.2.1
 - **Live Weather Coordinates:** Latitude/longitude now propagate instantly to active skins — entering new coordinates updates the weather within seconds (previously required a full reload).

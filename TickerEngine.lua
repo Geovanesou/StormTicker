@@ -1131,6 +1131,54 @@ function Update()
     end
 end
 
+-- Tooltip in-skin da barra de titulo: caixa escura dentro do header, ancorada
+-- a esquerda do botao de troca de modo (Box/Panoramic).
+local function PaintHeaderTip(text)
+    if not text or text == '' then return end
+    local tickerW = tonumber(SKIN:GetVariable('TickerWidth', '480')) or 480
+
+    local modeBoxX
+    if ViewMode == 1 then
+        local wthrW = tonumber(SKIN:GetVariable('WeatherPanelW', '340')) or 340
+        local screenW = tonumber(SKIN:GetVariable('SCREENAREAWIDTH', '1920')) or 1920
+        modeBoxX = (screenW - wthrW) - 114
+    else
+        modeBoxX = tickerW - 114
+    end
+
+    local tipW = 190
+    local tipX = modeBoxX - tipW - 10
+    if tipX < 4 then tipX = 4 end
+
+    local bgColor = SKIN:GetVariable('TooltipBgColor', '15,23,42,252')
+    local borderColor = SKIN:GetVariable('TooltipBorderColor', '56,189,248,220')
+    local bgShape = string.format('Rectangle 0,0,%d,18,3 | Fill Color %s | StrokeWidth 1 | Stroke Color %s', tipW, bgColor, borderColor)
+    SKIN:Bang('!SetOption', 'TipContainer', 'Shape', bgShape)
+    SKIN:Bang('!SetOption', 'TipContainer', 'X', tostring(tipX))
+    SKIN:Bang('!SetOption', 'TipContainer', 'Y', '2')
+
+    SKIN:Bang('!SetOption', 'TipText', 'W', tostring(tipW))
+    SKIN:Bang('!SetOption', 'TipText', 'H', '12')
+    SKIN:Bang('!SetOption', 'TipText', 'X', tostring(tipX + (tipW / 2)))
+    SKIN:Bang('!SetOption', 'TipText', 'StringAlign', 'Center')
+    SKIN:Bang('!SetOption', 'TipText', 'Y', '5')
+    SKIN:Bang('!SetOption', 'TipText', 'Text', text)
+
+    SKIN:Bang('!ShowMeterGroup', 'SingularTipGroup')
+    SKIN:Bang('!UpdateMeterGroup', 'SingularTipGroup')
+    SKIN:Bang('!Redraw')
+end
+
+function ShowHeaderTip(key)
+    PaintHeaderTip(SKIN:GetVariable(key, '') or '')
+end
+
+function HideBoxTip()
+    SKIN:Bang('!HideMeterGroup', 'SingularTipGroup')
+    SKIN:Bang('!UpdateMeterGroup', 'SingularTipGroup')
+    SKIN:Bang('!Redraw')
+end
+
 -- Renderiza o tooltip de extrapolação inteligente
 function ShowHeadlineTooltip(lineIndex)
     local line = Lines[lineIndex]
@@ -1187,6 +1235,7 @@ function ShowHeadlineTooltip(lineIndex)
         SKIN:Bang('!SetOption', 'TipText', 'H', tostring(tipH - 8))
         SKIN:Bang('!SetOption', 'TipText', 'X', '18')
         SKIN:Bang('!SetOption', 'TipText', 'Y', tostring(tipY + (isLong and 4 or 6)))
+        SKIN:Bang('!SetOption', 'TipText', 'StringAlign', 'Left')
         SKIN:Bang('!SetOption', 'TipText', 'FontColor', tipText)
         SKIN:Bang('!SetOption', 'TipText', 'Text', activeItem.title)
 
