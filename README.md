@@ -91,7 +91,7 @@ Switch themes instantly with a single click or through the context menu:
 ## 📦 Installation & Quick Start
 
 1. Ensure **[Rainmeter 4.5+](https://www.rainmeter.net/)** (or higher) is installed on Windows 10 or 11.
-2. Download the official **[`StormTicker_1.2.2.rmskin`](https://github.com/Geovanesou/StormTicker/releases/download/v1.2.2/StormTicker_1.2.2.rmskin)** package from the [Releases](https://github.com/Geovanesou/StormTicker/releases) page.
+2. Download the official **[`StormTicker_1.2.3.rmskin`](https://github.com/Geovanesou/StormTicker/releases/download/v1.2.3/StormTicker_1.2.3.rmskin)** package from the [Releases](https://github.com/Geovanesou/StormTicker/releases) page.
 3. Double-click the `.rmskin` file and follow the standard Rainmeter installation prompt.
 4. On first load, the **First-Run Setup Wizard** will launch automatically to welcome you and open the Settings Manager.
 5. In the **Rainmeter Manage** window, select your preferred layout and theme:
@@ -102,6 +102,11 @@ Switch themes instantly with a single click or through the context menu:
 ---
 
 ## 🗺️ Release History
+
+### 🌟 Version 1.2.3
+- **Feed Edit Live Propagation:** Editing a channel URL or tag now waits for the dialog to close and refreshes all loaded skins — the new feed appears within seconds instead of requiring a manual refresh.
+- **Metric/Imperial Toggle Fix:** The unit switcher refreshed skins via an invalid config path (forward slashes) — the refresh silently never fired. Units now propagate live.
+- **Scroll Speed Clarification:** The speed selector label now states "(Box mode only)" in all three languages — per-channel speeds drive individual Box rows, while Panoramic streams at a shared uniform rate.
 
 ### 🌟 Version 1.2.2
 - **Theme Renamed to Wall Street:** The default theme is now "Wall Street" (skins `Box Wall Street` / `Panoramic Wall Street`, `@Resources/Themes/Wall Street.inc`), matching StormTicker Pro naming.

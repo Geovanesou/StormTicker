@@ -179,9 +179,9 @@ function EditField(fieldType)
     if tab < 1 or tab > 3 then return end
     
     if fieldType == 'url' then
-        SKIN:Bang('["#@#Scripts\\EditUrl' .. tab .. '.bat"]')
+        SKIN:Bang('["#@#Scripts\\EditUrl' .. tab .. '.bat" "#PROGRAMPATH#"]')
     else
-        SKIN:Bang('["#@#Scripts\\EditTag' .. tab .. '.bat"]')
+        SKIN:Bang('["#@#Scripts\\EditTag' .. tab .. '.bat" "#PROGRAMPATH#"]')
     end
 end
 
@@ -251,8 +251,8 @@ function SetWeatherSystem(sys)
     SKIN:Bang('!SetVariable', 'WeatherApiUnit', apiUnit)
     SKIN:Bang('!SetVariable', 'WeatherWindUnit', windUnit)
     UpdateWeatherUI()
-    SKIN:Bang('!Refresh', 'StormTicker/Box')
-    SKIN:Bang('!Refresh', 'StormTicker/Panoramic')
+    SKIN:Bang('!Refresh', 'StormTicker\\Box')
+    SKIN:Bang('!Refresh', 'StormTicker\\Panoramic')
 end
 
 function SetCoordinates(inputStr)
